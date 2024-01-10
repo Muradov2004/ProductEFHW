@@ -1,0 +1,14 @@
+﻿@model AddTagViewModel
+
+<h2>Add Tag</h2>
+
+<form asp-controller="Tag" asp-action="Add" method="post">
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control"/>
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary" style="margin-top:10px;">Add Tag</button>
+    <a asp-controller="Tag" asp-action="Index" class="btn btn-primary" style="margin-top:10px;">Back</a>
+</form>

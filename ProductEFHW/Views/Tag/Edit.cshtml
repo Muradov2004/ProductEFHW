@@ -1,0 +1,20 @@
+﻿@model EditTagViewModel
+
+@if (Model is not null)
+{
+    <h2>Edit Tag</h2>
+    <form asp-controller="Tag" asp-action="Edit" method="post">
+        <div class="form-group">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control" value="@Model.Name" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="margin-top:10px;">Edit Tag</button>
+        <a asp-controller="Tag" asp-action="Index" class="btn btn-primary" style="margin-top:10px;">Back</a>
+    </form>
+}
+else
+{
+    <h2>Tag not found</h2>
+}

@@ -1,0 +1,22 @@
+﻿@model List<Tag>
+
+<a class="btn btn-primary container" asp-controller="Tag" asp-action="Add">Add Tag</a>
+@if (Model.Count > 0)
+{
+    <ul class="list-group list-group-flush">
+        @foreach (var item in Model)
+        {
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                @item.Name
+                <div class="btn-group" role="group">
+                    <a class="btn btn-outline-info" asp-controller="Tag" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    <a class="btn btn-outline-danger" asp-controller="Tag" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </div>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <h1 class="container">Empty</h1>
+}

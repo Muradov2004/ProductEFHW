@@ -1,0 +1,20 @@
+﻿@model EditCategoryViewModel
+
+@if (Model is not null)
+{
+    <h2>Edit Category</h2>
+    <form asp-controller="Category" asp-action="Edit" method="post">
+        <div class="form-group">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control" value="@Model.Name" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="margin-top:10px;">Edit Category</button>
+        <a asp-controller="Category" asp-action="Index" class="btn btn-primary" style="margin-top:10px;">Back</a>
+    </form>
+}
+else
+{
+    <h2>Tag not found</h2>
+}
