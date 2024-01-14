@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProductEFHW.Data;
 using ProductEFHW.Models;
@@ -9,10 +10,12 @@ namespace ProductEFHW.Controllers;
 public class ProductController : Controller
 {
     private readonly AppDbContext _appDbContext;
+    private readonly IMapper _mapper;
 
-    public ProductController(AppDbContext appDbContext)
+    public ProductController(AppDbContext appDbContext,IMapper mapper)
     {
         _appDbContext = appDbContext;
+        _mapper = mapper;
     }
 
     public IActionResult Index()
@@ -31,22 +34,13 @@ public class ProductController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> Add(AddProductViewModel product)
+    public async Task<IActionResult> Add(AddProductViewModel addProduct)
     {
         if (ModelState.IsValid)
         {
-            var productTags = _appDbContext.Tags.Where(t => product.TagIds!.Contains(t.Id)).ToList();
+            var product = _mapper.Map<Product>(addProduct);
 
-            var newProduct = new Product
-            {
-                CategoryId = product.CategoryId,
-                Price = product.Price,
-                Description = product.Description,
-                ImageUrl = product.ImageUrl,
-                Title = product.Title,
-                Tags = productTags
-            };
-            _appDbContext.Products.Add(newProduct);
+            _appDbContext.Products.Add(product);
             await _appDbContext.SaveChangesAsync();
             return RedirectToAction("Index");
         }
@@ -55,7 +49,7 @@ public class ProductController : Controller
         ViewData["Categories"] = categories;
         var tags = _appDbContext.Tags.ToList();
         ViewData["Tags"] = tags;
-        return View(product);
+        return View(addProduct);
     }
 
 

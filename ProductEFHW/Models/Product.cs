@@ -1,6 +1,4 @@
-﻿using ProductEFHW.Models.ViewModels;
-
-namespace ProductEFHW.Models;
+﻿namespace ProductEFHW.Models;
 
 public class Product : BaseEntity
 {
@@ -11,14 +9,5 @@ public class Product : BaseEntity
     public Category Category { get; set; } = null!;
     public int CategoryId { get; set; }
     public List<Tag> Tags { get; set; } = null!;
-
-    public static implicit operator Product(AddProductViewModel viewModel) => new()
-    {
-        Title = viewModel.Title,
-        Description = viewModel.Description,
-        CategoryId = viewModel.CategoryId,
-        Price = viewModel.Price,
-        ImageUrl = viewModel.ImageUrl,
-    };
 
 }

@@ -9,6 +9,7 @@ builder.Services.AddControllersWithViews();
 #pragma warning disable
 builder.Services.AddFluentValidation(f => f.RegisterValidatorsFromAssemblyContaining<Program>());
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 var app = builder.Build();
 
